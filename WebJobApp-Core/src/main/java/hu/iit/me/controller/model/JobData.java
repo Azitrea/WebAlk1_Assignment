@@ -2,14 +2,14 @@ package hu.iit.me.controller.model;
 
 public class JobData {
 
-    private String jobID;
+    private int jobID;
     private String jobName;
     private Education jobRequiredEducation;
     private String jobDescription;
     private int jobSalaryHuf;
     private String jobCategory;
 
-    public JobData(String jobID, String jobName, Education jobRequiredEducation, String jobDescription, int jobSalaryHuf, String jobCategory) {
+    public JobData(int jobID, String jobName, Education jobRequiredEducation, String jobDescription, int jobSalaryHuf, String jobCategory) {
         this.jobID = jobID;
         this.jobName = jobName;
         this.jobRequiredEducation = jobRequiredEducation;
@@ -18,11 +18,12 @@ public class JobData {
         this.jobCategory = jobCategory;
     }
 
-    public String getJobID() {
+
+    public int getJobID() {
         return jobID;
     }
 
-    public void setJobID(String jobID) {
+    public void setJobID(int jobID) {
         this.jobID = jobID;
     }
 

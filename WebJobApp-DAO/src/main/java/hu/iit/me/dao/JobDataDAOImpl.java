@@ -14,11 +14,11 @@ public class JobDataDAOImpl implements JobDataDAO {
     public JobDataDAOImpl(){
         jobDataStorage = new ArrayList<>();
 
-        jobDataStorage.add(new JobData(1,"RandomJob1", Education.HIGH_SCOOL, "Sok munka, kevés fizu",500,"Easy"));
-        jobDataStorage.add(new JobData(2,"RandomJob2", Education.MIDDLE_SCOOL, "Fizu?",1500,"Easy"));
+        jobDataStorage.add(new JobData(1,"RandomJob1", Education.MIDDLE_SCOOL, "Sok munka, kevés fizu",500,"Easy"));
+        jobDataStorage.add(new JobData(2,"RandomJob2", Education. UNIVERSITY, "Fizu?",1500,"Easy"));
         jobDataStorage.add(new JobData(3,"RandomJob3", Education.UNIVERSITY, "Itt nem kapsz semmit",3500,"ReallyEasy"));
-        jobDataStorage.add(new JobData(4,"RandomJob4", Education.MIDDLE_SCOOL, "Kappa",2500,"Hard"));
-        jobDataStorage.add(new JobData(5,"RandomJob5", Education.HIGH_SCOOL, "HAHAHHAHAHHAHA",1500,"Nope"));
+        jobDataStorage.add(new JobData(4,"RandomJob4", Education.HIGH_SCHOOL, "Kappa",2500,"Hard"));
+        jobDataStorage.add(new JobData(5,"RandomJob5", Education.HIGH_SCHOOL, "HAHAHHAHAHHAHA",1500,"Nope"));
 
     }
 

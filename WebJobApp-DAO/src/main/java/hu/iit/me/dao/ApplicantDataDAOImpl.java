@@ -3,10 +3,12 @@ package hu.iit.me.dao;
 import hu.iit.me.controller.dao.ApplicantDataDAO;
 import hu.iit.me.controller.model.ApplicantData;
 import hu.iit.me.controller.model.Education;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Repository
 public class ApplicantDataDAOImpl implements ApplicantDataDAO {
 
     private Collection<ApplicantData> applicantDataStorage;

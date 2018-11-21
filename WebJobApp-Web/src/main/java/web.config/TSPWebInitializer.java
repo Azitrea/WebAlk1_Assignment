@@ -15,7 +15,7 @@ public class TSPWebInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext acwactx = new AnnotationConfigWebApplicationContext();
 
-        acwactx.register(ApplicantContext.class);
+        acwactx.register(JobApplicantContext.class);
         acwactx.setServletContext(servletContext);
 
 

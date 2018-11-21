@@ -11,7 +11,7 @@ import java.util.Collection;
 
 
 @Controller
-@RequestMapping("/searchJobList")
+@RequestMapping("/searchJob")
 public class JobApplicantController {
 
     private JobDataService jobDataService;

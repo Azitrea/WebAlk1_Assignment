@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-    <xs:complexType name="JobDataX">
+    <xs:complexType name="JobDataXSD">
         <xs:all>
             <xs:element name="jobID" type="xs:int"/>
             <xs:element name="jobName" type="xs:string"/>
@@ -13,9 +13,9 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="jobDescription"/>
-            <xs:element name="jobSalary"/>
-            <xs:element name="jobCategory"/>
+            <xs:element name="jobDescription" type="xs:string"/>
+            <xs:element name="jobSalary" type="xs:int"/>
+            <xs:element name="jobCategory" type="xs:string"/>
         </xs:all>
     </xs:complexType>
 </xs:schema>

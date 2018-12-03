@@ -26,4 +26,9 @@ public class JobDataDAOImpl implements JobDataDAO {
     public Collection<JobData> listJobData() {
         return jobDataStorage;
     }
+
+    @Override
+    public void addNewJob(JobData newjob) {
+        jobDataStorage.add(newjob);
+    }
 }

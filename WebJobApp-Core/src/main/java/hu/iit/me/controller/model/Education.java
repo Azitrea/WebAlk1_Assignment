@@ -1,7 +1,7 @@
 package hu.iit.me.controller.model;
 
 public enum Education {
-    MIDDLE_SCOOL(1),
+    MIDDLE_SCHOOL(1),
     HIGH_SCHOOL(2),
     UNIVERSITY(3);
 

@@ -11,6 +11,8 @@ import hu.iit.me.dto.JobDataXSD;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 
 @Controller
 @RequestMapping("/hr")
@@ -19,15 +21,15 @@ public class HRJobSettingsController {
     private HRJobSettingsService hrJobSettingsService;
     private JobDataService jobDataService;
 
-
-    public HRJobSettingsController(HRJobSettingsService hrJobSettingsService) {
+    public HRJobSettingsController(HRJobSettingsService hrJobSettingsService, JobDataService jobDataService) {
         this.hrJobSettingsService = hrJobSettingsService;
+        this.jobDataService = jobDataService;
     }
 
     @PostMapping(value="/addJob")
-    public @ResponseBody String addNewJob(@RequestBody JobDataXSD newjob) throws JobAlreadyExistException, IDAlreadyExistException, WrongSalaryException, ListIsEmptyException {
+    public @ResponseBody Collection<JobDataXSD> addNewJob(@RequestBody JobDataXSD newjob) throws JobAlreadyExistException, IDAlreadyExistException, WrongSalaryException, ListIsEmptyException {
         hrJobSettingsService.addNewJob(Converter.unmarshal(newjob));
-        return "OK";
+        return Converter.marshalList(jobDataService.listJobData());
     }
 
 }

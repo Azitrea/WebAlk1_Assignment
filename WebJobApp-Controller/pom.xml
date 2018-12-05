@@ -88,11 +88,13 @@
 
                     <configuration>
                         <packageName>hu.iit.me.dto</packageName>
-                        <sources>src/main/resources</sources>
+                        <sources>
+                            <source>${basedir}/src/main/resources</source>
+                        </sources>
+                        <outputDirectory>${basedir}/src/main/java/hu/iit/me/dto</outputDirectory>
                     </configuration>
                 </plugin>
             </plugins>
-
         </pluginManagement>
     </build>
 </project>

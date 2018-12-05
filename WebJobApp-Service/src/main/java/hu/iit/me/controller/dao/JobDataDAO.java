@@ -11,14 +11,6 @@ public interface JobDataDAO {
 
     public Collection<JobData> returnJobData();
 
-    public Collection<JobData> returnJobSortedByName();
-
-    public Collection<JobData> returnJobRequiredEducationLevel(Education education);
-
-    public Collection<JobData> returnJobByName(String name);
-
-    public Collection<JobData> returnJobByMinSalary(int salary);
-
-    public void addNewJob(JobData newjob);
+    public void saveJob(JobData newjob);
 
 }

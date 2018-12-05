@@ -26,61 +26,10 @@ public class JobDataDAOImpl implements JobDataDAO {
         return jobDataStorage;
     }
 
-    @Override
-    public Collection<JobData> returnJobSortedByName() {
-        ArrayList<JobData> jobData = new ArrayList(jobDataStorage);
-
-
-        Collections.sort(jobData, new Comparator<JobData>() {
-            @Override
-            public int compare(JobData o1, JobData o2) {
-                return o1.getJobName().compareToIgnoreCase(o2.getJobName());
-            }
-        });
-
-        return jobData;
-    }
 
     @Override
-    public Collection<JobData> returnJobRequiredEducationLevel(Education education) {
-        Collection<JobData> jobData = new ArrayList<>();
-
-        for (JobData jobs : jobDataStorage){
-            if(jobs.getJobRequiredEducation().getNumval() <= education.getNumval()){
-                jobData.add(jobs);
-            }
-        }
-
-        return jobData;
-    }
-
-    @Override
-    public Collection<JobData> returnJobByName(String name) {
-        Collection<JobData> jobData = new ArrayList<>();
-
-        for (JobData jobs : jobDataStorage){
-            if(jobs.getJobName().equals(name)){
-                jobData.add(jobs);
-            }
-        }
-
-        return jobData;
-    }
-
-    @Override
-    public Collection<JobData> returnJobByMinSalary(int salary) {
-        Collection<JobData> jobData = new ArrayList<>();
-
-        for (JobData jobs : jobDataStorage){
-            if(jobs.getJobSalaryHuf() >= salary){
-                jobData.add(jobs);
-            }
-        }
-        return jobData;
-    }
-
-    @Override
-    public void addNewJob(JobData newjob) {
+    public void saveJob(JobData newjob) {
         jobDataStorage.add(newjob);
     }
+
 }

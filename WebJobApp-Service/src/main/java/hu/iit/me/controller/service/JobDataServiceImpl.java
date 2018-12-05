@@ -2,6 +2,7 @@ package hu.iit.me.controller.service;
 
 import hu.iit.me.controller.Exception.ListIsEmptyException;
 import hu.iit.me.controller.Exception.WrongFunctionParameterException;
+import hu.iit.me.controller.Exception.WrongSalaryException;
 import hu.iit.me.controller.dao.JobDataDAO;
 import hu.iit.me.controller.model.Education;
 import hu.iit.me.controller.model.JobData;
@@ -9,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class JobDataServiceImpl implements JobDataService {
 
     @Autowired
     private JobDataDAO jobDataDAO;
+
 
     @Override
     public Collection<JobData> listJobData() throws ListIsEmptyException {
@@ -28,52 +32,83 @@ public class JobDataServiceImpl implements JobDataService {
     @Override
     public Collection<JobData> listJobsSortedByName() throws ListIsEmptyException {
 
-        if(jobDataDAO.returnJobSortedByName().isEmpty()){
+        ArrayList<JobData> jobData = new ArrayList(jobDataDAO.returnJobData());
+
+        if(jobData.isEmpty()){
             throw new ListIsEmptyException();
         }
 
-        return jobDataDAO.returnJobSortedByName();
+        Collections.sort(jobData, new Comparator<JobData>() {
+            @Override
+            public int compare(JobData o1, JobData o2) {
+                return o1.getJobName().compareToIgnoreCase(o2.getJobName());
+            }
+        });
+
+        return jobData;
     }
 
     @Override
     public Collection<JobData> listJobsByRequiredEducationLevel(Education education) throws ListIsEmptyException, WrongFunctionParameterException {
+        Collection<JobData> jobData = new ArrayList<>();
 
         if(education == null){
             throw new WrongFunctionParameterException();
         }
 
-        if(jobDataDAO.returnJobRequiredEducationLevel(education).isEmpty()){
+        for (JobData jobs : jobDataDAO.returnJobData()){
+            if(jobs.getJobRequiredEducation().getNumval() <= education.getNumval()){
+                jobData.add(jobs);
+            }
+        }
+
+        if(jobData.isEmpty()){
             throw new ListIsEmptyException();
         }
 
-        return jobDataDAO.returnJobRequiredEducationLevel(education);
+        return jobData;
     }
 
     @Override
     public Collection<JobData> listJobByName(String name) throws ListIsEmptyException, WrongFunctionParameterException {
+        Collection<JobData> jobData = new ArrayList<>();
 
         if(name.equals(null)){
             throw new WrongFunctionParameterException();
         }
 
-        if(jobDataDAO.returnJobByName(name).isEmpty()){
+        for (JobData jobs : jobDataDAO.returnJobData()){
+            if(jobs.getJobName().equals(name)){
+                jobData.add(jobs);
+            }
+        }
+
+        if(jobData.isEmpty()){
             throw new ListIsEmptyException();
         }
 
-        return jobDataDAO.returnJobByName(name);
+        return jobData;
     }
 
     @Override
-    public Collection<JobData> listJobByMinSalary(int salary) throws ListIsEmptyException, WrongFunctionParameterException {
+    public Collection<JobData> listJobByMinSalary(int salary) throws ListIsEmptyException, WrongSalaryException {
+        Collection<JobData> jobData = new ArrayList<>();
 
         if(salary < 0){
-            throw new WrongFunctionParameterException();
+            throw new WrongSalaryException();
         }
 
-        if(jobDataDAO.returnJobByMinSalary(salary).isEmpty()){
+        for (JobData jobs : jobDataDAO.returnJobData()){
+            if(jobs.getJobSalaryHuf() >= salary){
+                jobData.add(jobs);
+            }
+        }
+
+        if(jobData.isEmpty()){
             throw new ListIsEmptyException();
         }
 
-        return jobDataDAO.returnJobByMinSalary(salary);
+        return jobData;
     }
+
 }

@@ -16,7 +16,9 @@ public class TSPWebInitializer implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext acwactx = new AnnotationConfigWebApplicationContext();
 
         acwactx.register(JobApplicantContext.class);
+        acwactx.register(HRJobSettingsContext.class);
         acwactx.setServletContext(servletContext);
+
 
 
         ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("dispatcher", new DispatcherServlet((WebApplicationContext) acwactx));

@@ -11,7 +11,12 @@ import java.util.Collection;
 public class Converter {
 
     public static JobData unmarshal(JobDataXSD jobDataXSD){
-        return new JobData(jobDataXSD.getJobID(),jobDataXSD.getJobName(), Education.valueOf(jobDataXSD.getJobRequiredEducation()),jobDataXSD.getJobDescription(),jobDataXSD.getJobSalary(),jobDataXSD.getJobCategory());
+        return new JobData(jobDataXSD.getJobID(),
+                            jobDataXSD.getJobName(),
+                            Education.valueOf(jobDataXSD.getJobRequiredEducation()),
+                            jobDataXSD.getJobDescription(),
+                            jobDataXSD.getJobSalary(),
+                            jobDataXSD.getJobCategory());
     }
 
     public static JobDataXSD marshal(JobData jobData){

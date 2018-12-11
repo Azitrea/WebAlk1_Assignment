@@ -21,12 +21,13 @@ public class HRJobSettingsServiceImpl implements HRJobSettingsService{
         }
 
         for(JobData j : jobDataDAO.returnJobData()){
-            if(j.getJobName().equals(newjob.getJobName())){
-                throw new JobAlreadyExistException();
-            }
 
             if(j.getJobID() == newjob.getJobID()){
                 throw new IDAlreadyExistException();
+            }
+
+            if(j.getJobName().equals(newjob.getJobName())){
+                throw new JobAlreadyExistException();
             }
         }
 

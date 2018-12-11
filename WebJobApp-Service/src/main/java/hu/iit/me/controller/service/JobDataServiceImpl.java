@@ -49,12 +49,24 @@ public class JobDataServiceImpl implements JobDataService {
     }
 
     @Override
-    public Collection<JobData> listJobsByRequiredEducationLevel(Education education) throws ListIsEmptyException, WrongFunctionParameterException {
+    public Collection<JobData> listJobsByRequiredEducationLevel(String educationString) throws ListIsEmptyException, WrongFunctionParameterException {
         Collection<JobData> jobData = new ArrayList<>();
 
-        if(education == null){
+        if(educationString == null){
             throw new WrongFunctionParameterException();
         }
+
+        Education education = null;
+        for (Education edu : Education.values()) {
+            if (edu.name().equalsIgnoreCase(educationString)) {
+                education = edu;
+            }
+        }
+
+        if (education == null){
+            throw new WrongFunctionParameterException();
+        }
+
 
         for (JobData jobs : jobDataDAO.returnJobData()){
             if(jobs.getJobRequiredEducation().getNumval() <= education.getNumval()){
@@ -93,6 +105,7 @@ public class JobDataServiceImpl implements JobDataService {
     @Override
     public Collection<JobData> listJobByMinSalary(int salary) throws ListIsEmptyException, WrongSalaryException {
         Collection<JobData> jobData = new ArrayList<>();
+
 
         if(salary < 0){
             throw new WrongSalaryException();

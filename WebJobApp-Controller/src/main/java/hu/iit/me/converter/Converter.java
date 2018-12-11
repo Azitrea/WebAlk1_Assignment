@@ -1,8 +1,11 @@
 package hu.iit.me.converter;
 
+import hu.iit.me.controller.Exception.IDIsInvalid;
+import hu.iit.me.controller.Exception.WrongSalaryException;
 import hu.iit.me.controller.model.Education;
 import hu.iit.me.controller.model.JobData;
 import hu.iit.me.dto.JobDataXSD;
+import hu.iit.me.dto.NameXSD;
 
 
 import java.util.ArrayList;
@@ -10,7 +13,7 @@ import java.util.Collection;
 
 public class Converter {
 
-    public static JobData unmarshal(JobDataXSD jobDataXSD){
+    public static JobData unmarshal(JobDataXSD jobDataXSD) throws IDIsInvalid, WrongSalaryException {
         return new JobData(jobDataXSD.getJobID(),
                             jobDataXSD.getJobName(),
                             Education.valueOf(jobDataXSD.getJobRequiredEducation()),
@@ -32,6 +35,14 @@ public class Converter {
 
     }
 
+    public static NameXSD marshalName(JobData jobData){
+        NameXSD nameXSD = new NameXSD();
+        nameXSD.setJobId(jobData.getJobID());
+        nameXSD.setJobName(jobData.getJobName());
+
+        return nameXSD;
+    }
+
     public static Collection<JobDataXSD> marshalList(Collection<JobData> jobData){
         Collection<JobDataXSD> jobDataXSD = new ArrayList<>();
         for(JobData jdX : jobData){
@@ -39,6 +50,14 @@ public class Converter {
         }
 
         return jobDataXSD;
+    }
+
+    public static Collection<NameXSD> marshalToNameList(Collection<JobData> jobData){
+        Collection<NameXSD> nameList = new ArrayList<>();
+        for(JobData jdX : jobData){
+             nameList.add(marshalName(jdX));
+        }
+        return nameList;
     }
 
 }

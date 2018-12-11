@@ -1,13 +1,11 @@
 package hu.iit.me.controller;
 
-import hu.iit.me.controller.Exception.IDAlreadyExistException;
-import hu.iit.me.controller.Exception.JobAlreadyExistException;
-import hu.iit.me.controller.Exception.ListIsEmptyException;
-import hu.iit.me.controller.Exception.WrongSalaryException;
+import hu.iit.me.controller.Exception.*;
 import hu.iit.me.controller.service.HRJobSettingsService;
 import hu.iit.me.controller.service.JobDataService;
 import hu.iit.me.converter.Converter;
 import hu.iit.me.dto.JobDataXSD;
+import hu.iit.me.dto.NameXSD;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +25,15 @@ public class HRJobSettingsController {
     }
 
     @PostMapping(value="/addJob")
-    public @ResponseBody Collection<JobDataXSD> addNewJob(@RequestBody JobDataXSD newjob) throws JobAlreadyExistException, IDAlreadyExistException, WrongSalaryException, ListIsEmptyException {
+    public @ResponseBody Collection<JobDataXSD> addNewJob(@RequestBody JobDataXSD newjob) throws JobAlreadyExistException, IDIsInvalid, IDAlreadyExistException, WrongSalaryException, ListIsEmptyException {
         hrJobSettingsService.addNewJob(Converter.unmarshal(newjob));
         return Converter.marshalList(jobDataService.listJobData());
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Collection<NameXSD> listAllJobs() throws ListIsEmptyException {
+        return Converter.marshalToNameList(jobDataService.listJobData());
     }
 
 }

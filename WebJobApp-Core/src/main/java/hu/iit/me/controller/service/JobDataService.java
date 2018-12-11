@@ -14,7 +14,7 @@ public interface JobDataService {
 
     public Collection<JobData> listJobsSortedByName() throws ListIsEmptyException;
 
-    public Collection<JobData> listJobsByRequiredEducationLevel(Education education) throws ListIsEmptyException, WrongFunctionParameterException;
+    public Collection<JobData> listJobsByRequiredEducationLevel(String education) throws ListIsEmptyException, WrongFunctionParameterException;
 
     public Collection<JobData> listJobByName(String name) throws ListIsEmptyException, WrongFunctionParameterException;
 

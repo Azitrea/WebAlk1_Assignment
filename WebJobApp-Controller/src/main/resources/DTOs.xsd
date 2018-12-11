@@ -4,18 +4,17 @@
         <xs:all>
             <xs:element name="jobID" type="xs:int"/>
             <xs:element name="jobName" type="xs:string"/>
-            <xs:element name="jobRequiredEducation">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="MIDDLE_SCOOL"/>
-                        <xs:enumeration value="HIGH_SCOOOL"/>
-                        <xs:enumeration value="UNIVERSITY"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="jobRequiredEducation" type="xs:string"/>
             <xs:element name="jobDescription" type="xs:string"/>
             <xs:element name="jobSalary" type="xs:int"/>
             <xs:element name="jobCategory" type="xs:string"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="NameXSD">
+        <xs:all>
+            <xs:element name="jobId" type="xs:int"/>
+            <xs:element name="jobName" type="xs:string"/>
         </xs:all>
     </xs:complexType>
 </xs:schema>

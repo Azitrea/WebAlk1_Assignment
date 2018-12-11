@@ -3,7 +3,6 @@ package hu.iit.me.controller;
 import hu.iit.me.controller.Exception.ListIsEmptyException;
 import hu.iit.me.controller.Exception.WrongFunctionParameterException;
 import hu.iit.me.controller.Exception.WrongSalaryException;
-import hu.iit.me.controller.model.Education;
 import hu.iit.me.controller.service.JobDataService;
 import hu.iit.me.converter.Converter;
 import hu.iit.me.dto.JobDataXSD;
@@ -40,7 +39,7 @@ public class JobApplicantController {
 
     @RequestMapping(value = "/listByMinEducation", method = RequestMethod.GET)
     @ResponseBody
-    public Collection<JobDataXSD> listJobByMinEducation(@RequestParam(value = "education")Education education) throws ListIsEmptyException, WrongFunctionParameterException{
+    public Collection<JobDataXSD> listJobByMinEducation(@RequestParam(value = "education")String education) throws ListIsEmptyException, WrongFunctionParameterException{
        return Converter.marshalList(jobDataService.listJobsByRequiredEducationLevel(education));
     }
 

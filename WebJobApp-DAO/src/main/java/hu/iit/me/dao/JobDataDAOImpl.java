@@ -1,5 +1,7 @@
 package hu.iit.me.dao;
 
+import hu.iit.me.controller.Exception.IDIsInvalid;
+import hu.iit.me.controller.Exception.WrongSalaryException;
 import hu.iit.me.controller.dao.JobDataDAO;
 import hu.iit.me.controller.model.Education;
 import hu.iit.me.controller.model.JobData;
@@ -10,14 +12,14 @@ public class JobDataDAOImpl implements JobDataDAO {
 
     private Collection<JobData> jobDataStorage;
 
-    public JobDataDAOImpl(){
+    public JobDataDAOImpl() throws IDIsInvalid, WrongSalaryException {
         jobDataStorage = new ArrayList<>();
 
-        jobDataStorage.add(new JobData(1,"ERandomJob1", Education.MIDDLE_SCHOOL, "Sok munka, kevés fizu",500,"Easy"));
-        jobDataStorage.add(new JobData(2,"CRandomJob2", Education. UNIVERSITY, "Fizu?",1500,"Easy"));
-        jobDataStorage.add(new JobData(3,"DRandomJob3", Education.UNIVERSITY, "Itt nem kapsz semmit",3500,"ReallyEasy"));
-        jobDataStorage.add(new JobData(4,"ARandomJob4", Education.HIGH_SCHOOL, "Kappa",2500,"Hard"));
-        jobDataStorage.add(new JobData(5,"BRandomJob5", Education.HIGH_SCHOOL, "HAHAHHAHAHHAHA",1500,"Nope"));
+        jobDataStorage.add(new JobData(1,"ERandomJob1", Education.MIDDLE_SCHOOL, "Lifting heavy things",1000,"physical work"));
+        jobDataStorage.add(new JobData(2,"CRandomJob2", Education. UNIVERSITY, "Data manager",1500,"office work"));
+        jobDataStorage.add(new JobData(3,"DRandomJob3", Education.UNIVERSITY, "0-24 paperwork",3500,"office work"));
+        jobDataStorage.add(new JobData(4,"ARandomJob4", Education.HIGH_SCHOOL, "Warehouse keeper",2000,"warehouse"));
+        jobDataStorage.add(new JobData(5,"BRandomJob5", Education.HIGH_SCHOOL, "School maintainer",1500,"maintenance"));
 
     }
 

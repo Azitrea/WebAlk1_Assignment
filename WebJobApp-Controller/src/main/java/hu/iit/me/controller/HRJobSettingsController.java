@@ -6,6 +6,7 @@ import hu.iit.me.controller.service.JobDataService;
 import hu.iit.me.converter.Converter;
 import hu.iit.me.dto.JobDataXSD;
 import hu.iit.me.dto.NameXSD;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,21 @@ public class HRJobSettingsController {
     @ResponseBody
     public Collection<NameXSD> listAllJobs() throws ListIsEmptyException {
         return Converter.marshalToNameList(jobDataService.listJobData());
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "The list you requested is empty")
+    @ExceptionHandler({ListIsEmptyException.class })
+    public void EmptyList(){
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Argument is illegal")
+    @ExceptionHandler({IDIsInvalid.class, WrongSalaryException.class})
+    public void WrongParameter(){
+    }
+
+    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "This job is already in the database. Try it with an another ID or name.")
+    @ExceptionHandler({JobAlreadyExistException.class, IDAlreadyExistException.class})
+    public void AlreadyExist(){
     }
 
 }

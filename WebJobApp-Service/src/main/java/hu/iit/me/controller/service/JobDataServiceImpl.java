@@ -1,5 +1,6 @@
 package hu.iit.me.controller.service;
 
+import hu.iit.me.controller.Exception.AmountIsTooMutch;
 import hu.iit.me.controller.Exception.ListIsEmptyException;
 import hu.iit.me.controller.Exception.WrongFunctionParameterException;
 import hu.iit.me.controller.Exception.WrongSalaryException;
@@ -85,7 +86,7 @@ public class JobDataServiceImpl implements JobDataService {
     public Collection<JobData> listJobByName(String name) throws ListIsEmptyException, WrongFunctionParameterException {
         Collection<JobData> jobData = new ArrayList<>();
 
-        if(name.equals(null)){
+        if(name.isEmpty()){
             throw new WrongFunctionParameterException();
         }
 
@@ -103,7 +104,7 @@ public class JobDataServiceImpl implements JobDataService {
     }
 
     @Override
-    public Collection<JobData> listJobByMinSalary(int salary) throws ListIsEmptyException, WrongSalaryException {
+    public Collection<JobData> listJobByMinSalary(int salary) throws AmountIsTooMutch, WrongSalaryException {
         Collection<JobData> jobData = new ArrayList<>();
 
 
@@ -118,7 +119,7 @@ public class JobDataServiceImpl implements JobDataService {
         }
 
         if(jobData.isEmpty()){
-            throw new ListIsEmptyException();
+            throw new AmountIsTooMutch();
         }
 
         return jobData;

@@ -1,5 +1,6 @@
 package hu.iit.me.controller.service;
 
+import hu.iit.me.controller.Exception.AmountIsTooMutch;
 import hu.iit.me.controller.Exception.ListIsEmptyException;
 import hu.iit.me.controller.Exception.WrongFunctionParameterException;
 import hu.iit.me.controller.Exception.WrongSalaryException;
@@ -18,6 +19,6 @@ public interface JobDataService {
 
     public Collection<JobData> listJobByName(String name) throws ListIsEmptyException, WrongFunctionParameterException;
 
-    public Collection<JobData> listJobByMinSalary(int salalry) throws ListIsEmptyException, WrongSalaryException;
+    public Collection<JobData> listJobByMinSalary(int salalry) throws WrongSalaryException, AmountIsTooMutch;
 
 }

@@ -1,16 +1,12 @@
 package hu.iit.me.controller;
 
-import hu.iit.me.controller.Exception.ListIsEmptyException;
-import hu.iit.me.controller.Exception.WrongFunctionParameterException;
-import hu.iit.me.controller.Exception.WrongSalaryException;
+import hu.iit.me.controller.Exception.*;
 import hu.iit.me.controller.service.JobDataService;
 import hu.iit.me.converter.Converter;
 import hu.iit.me.dto.JobDataXSD;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -51,7 +47,24 @@ public class JobApplicantController {
 
     @RequestMapping(value = "/listByMinSalary", method = RequestMethod.GET)
     @ResponseBody
-    public Collection<JobDataXSD> listJobByMinSalary(@RequestParam(value = "minSalary") int minSalary) throws ListIsEmptyException, WrongSalaryException {
+    public Collection<JobDataXSD> listJobByMinSalary(@RequestParam(value = "minSalary") int minSalary) throws AmountIsTooMutch, WrongSalaryException {
         return Converter.marshalList(jobDataService.listJobByMinSalary(minSalary));
     }
+
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "The list you requested is empty")
+    @ExceptionHandler({ListIsEmptyException.class })
+    public void EmptyList(){
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Argument is illegal")
+    @ExceptionHandler({IDIsInvalid.class, WrongSalaryException.class, WrongFunctionParameterException.class})
+    public void WrongParameter(){
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "The amount you gave is too mutch")
+    @ExceptionHandler(AmountIsTooMutch.class)
+    public void AmountTooMutch(){
+    }
+
 }

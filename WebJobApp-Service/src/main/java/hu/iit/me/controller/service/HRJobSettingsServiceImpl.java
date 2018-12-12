@@ -16,11 +16,12 @@ public class HRJobSettingsServiceImpl implements HRJobSettingsService{
     @Override
     public void addNewJob(JobData newjob) throws JobAlreadyExistException, IDAlreadyExistException, WrongSalaryException {
 
-        if (newjob.getJobSalaryHuf() < 0){
+        if (newjob.getJobSalaryHuf() < 100){
             throw new WrongSalaryException();
         }
 
         for(JobData j : jobDataDAO.returnJobData()){
+
 
             if(j.getJobID() == newjob.getJobID()){
                 throw new IDAlreadyExistException();
